@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+__author__ = "biuro@tmask.pl"
+__copyright__ = "Copyright (C) 2021 TMask.pl"
+__license__ = "MIT License"
+__version__ = "1.0"
+
 # pip3 install pycryptodome
 
 # sudo apt-get install build-essential python3-dev
