@@ -5,11 +5,16 @@ __copyright__ = "Copyright (C) 2021 TMask.pl"
 __license__ = "MIT License"
 __version__ = "1.0"
 
-# pip3 install pycryptodome
 
+# Windows
+# pip3 install pycryptodome
+# pip3 install rsa
+
+
+# Linux
 # sudo apt-get install build-essential python3-dev
 # pip3 install pycryptodomex
-# pip3 install pycryptodome-test-vectors
+# pip3 install pycryptodome
 # python3 - m Cryptodome.SelfTest
 
 
@@ -43,10 +48,6 @@ def testRSA():
 
 # Zmienne       
 
-file_path = 'd_dst.json'
-
-path_prvkey = 'prv_key.txt'
-path_pubkey = 'pub_key.txt'
 
 # Tworzenie pary kluczy
 def generateRSAKeyPair(passphrase):
@@ -59,6 +60,7 @@ def generateRSAKeyPair(passphrase):
     public_key = key.publickey().exportKey()
     return private_key, public_key
 
+# Zapisz klucze
 def saveKeyToFiles(passphrase, prvkey, pubkey):
     private, public = generateRSAKeyPair(passphrase)
     
@@ -66,7 +68,8 @@ def saveKeyToFiles(passphrase, prvkey, pubkey):
         f.write(private)
     with open(pubkey, 'wb') as f:
         f.write(public)
-        
+
+# Zaszyfruj kluczem pub  
 def encrypt(key, src_file_path, encrypted_file_path):
     rsa_key = RSA.import_key(key)
     
@@ -85,6 +88,7 @@ def encrypt(key, src_file_path, encrypted_file_path):
             f.write(digest)
             f.write(ciphertext)
 
+# Rozszyfruj kluczem prv
 def decrypt(key, passphrase, encrypted_file_path):
     rsa_key = RSA.import_key(key, passphrase=passphrase)
     with open(encrypted_file_path, 'rb') as f:
